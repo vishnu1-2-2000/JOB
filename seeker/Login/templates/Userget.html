@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+    <div class="container">
+      <!-- Trigger the modal with a button -->
+    
+    
+      <!-- Modal -->
+      <div class="modal show" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+           
+             <center> <h3 class="modal-title" style="font-family: Times New Roman;color:gray">Please Select Your Role </h3></center>
+            </div>
+            <div class="modal-body">
+              <form method="POST" action = ""  enctype="multipart/form-data">
+                {% csrf_token %}     
+   
+    <div class="card" >
+   
+     
+     
+                <div class="card-body" style="font-family: Times New Roman;color:brown">
+                    <label for="userrole">Select User Role</label>
+                    <select name="userrole" id="userrole" style="width:50%;height:30px">
+                                    <option value="Employer">Employer</option>
+                                    <option value="Candidate">Candidate</option>
+                                    
+                                  </select>
+                </div>
+              </div>
+              <div class="modal-footer">
+             
+                <button type="submit" class="btn btn-success m-1" >Submit</button>
+               
+            
+              </div>
+              
+    </form>
+            </div>
+           
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </body>
+</html>

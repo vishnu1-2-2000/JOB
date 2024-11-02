@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+{% comment %} {%extends "Navbar.html" %}
+{%block body_block%} {% endcomment %}
+ <html>
+    <head>
+      <meta charset="utf-8" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+          <title></title>
+          {% load static %} 
+            <meta name="description" content="">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+             <link rel="stylesheet" href="{% static 'css/card.css' %}"> 
+                  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+                  <style>
+                    .row {
+                        display: flex;
+                    }
+                    .column {
+                        flex: 25%;
+                        padding: 10px;
+                        box-sizing: border-box;
+                    }
+                </style>           
+    </head>
+    
+  <body style="background-color:#7F5A58"> 
+     <nav class="navbar navbar-expand-lg bg-body-tertiary" style="position:fixed;  
+              z-index:1; /*Add this*/
+              width:100%;
+              height:50px;
+              text-align:center;
+              vertical-align:middle;
+              line-height:50px;
+              background: linear-gradient(90deg, rgba(3,19,24,1) 21%, rgba(0,3,2,0.9570203081232493) 51%, rgba(2,42,50,1) 100%);
+              top:0px;">
+        <div class="container-fluid">
+          <a class="navbar-brand" style="color: white" href="#">Job Portal Application </a>
+          <a class="navbar-brand" style="color: white" href="#">Welcome {{username}}</a>
+           
+         
+              <ul  class="nav justify-content-end" >
+                <li class="nav-item">
+                  <a class="nav-link active" style="color: white" aria-current="page" href="{%url 'employer_jobs' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" style="color: white" aria-current="page" href="{%url 'company' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" style="color: white" href="{%url 'addjob' %}">Add Job</a>
+                </li>
+                <li class="nav-item">
+                  <a  class="btn btn-danger" style="color: white" href="{%url 'signout' %}">Logout</a>
+                </li>
+               
+              </ul>
+           
+          </div>
+        </nav> 
+        <br></br><br></br> 
+       
+          
+        <div class="container-fluid">      
+          <form  method="post" class="row g-3" action="{%url 'filterjobs' %}" style="   
+                                         
+                background-color:#3F000F">
+              {% csrf_token %} 
+            <br/>
+        <div class="col-md-3" style="display: flex;flex-direction:column;">        
+          <label for="patient_name" style="color:white"><b> Enter Job Title</b></label>
+            <input type="text" name="name" >   
+            <br/>
+        </div> 
+        <div class="col-md-3" style="display: flex;flex-direction:column;">
+                <label for="patient_name" style="color:white"><b>Enter Location</b></label>
+                  <input type="text" style="color:white" name="location" >   
+            <br/>
+                                                </div>
+      <div class="col-md-3" style="display: flex;flex-direction:column;">
+        <label for="patient_name" style="color:white"><b>Enter Date</b></label>
+          <input type="date" name="date" >   
+          <br/>
+        </div>
+        <div class="col-md-2" style="display: flex;flex-direction:column;">
+          <br/>
+          <button class="btn btn-primary" type="submit">Search</button>
+                
+        </div>
+  </form>            
+                                      </div>
+                                      <br/>
+
+        <div class="container"   >
+         
+          {% if jobs == "No Data Found" %}
+         <center> <font  face="times new roman" size="4" style="color:black">No Data Available In This List</font></center>
+         {% else %}
+
+                {% for data in jobs %}
+                  <div class="card " id="jobcard" style="background-color:#3F000F" >
+                 
+                        <div class="card-body" style="font-family: Times New Roman;color:white" ;>
+                          <h3 class="card-title" style="color:#FAAFBE">{{data.job_name}}</h3>
+                            <p> {{data.description}}</p>
+                            <p> Company - {{data.company_name}}</p>
+                              <p class="card-text"> Location -{{data.location}} <br/>
+                                Expirance - {{data.expirance}}<br/>
+                                Qualification - {{data.qualification}}<br/>
+                               Skills - {{data.skills}}
+                              </p>
+                              <a style="float: right;" class="btn btn-info" href="{%url 'viewapplication' data.job_code %}" class="btn btn-danger m-1" > View Applications  {{data.application_count}}  </a> 
+                              <br/> <br/> 
+                               <b style="float: right; color:#E8A317">
+                                End Date  {{data.date}}
+                              </b>
+    
+                              <a class="btn btn-primary" href="{%url 'edit_job' data.id%}" class="btn btn-danger m-1" >  Edit  </a>  <a href="{%url 'delete_job' data.id%}" class="btn btn-danger m-1" > Delete  </a>      
+                          </div>
+                      </div><br/>
+                      {% endfor %}
+                      {% endif %}
+                           
+              </div> 
+          
+             
+          </body>
+    </html> 

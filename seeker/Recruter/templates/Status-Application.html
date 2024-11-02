@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  </head>
+  <body>
+    
+<br></br><br></br> 
+    <div class="container">
+      <!-- Trigger the modal with a button -->
+    
+    
+      <!-- Modal -->
+      <div class="modal show" id="myModal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+           
+             <center> <h3 class="modal-title" style="font-family: Times New Roman;color:blue">Candidate Details </h3></center>
+            </div>
+            <div class="modal-body">
+              <form method="GET" action = ""  enctype="multipart/form-data">
+                {% csrf_token %}     
+    {% for data in obj %}
+    <div class="card" >
+     <center> <h4 class="card-text" style="font-family: Times New Roman;color:blue"> Job Code-{{data.job_code}}</h4></center>
+     
+      <a href="#">
+        {% comment %} <img src="/media/images/admin_2_5mFLdV7.jpg" /> {% endcomment %}
+      <center>  <img src="/media/{{data.photo}}" style="width:30%" /></center>
+    </a>
+              <center>  <div class="card-body" style="font-family: Times New Roman;color:brown">
+                  <h4 class="card-title"> Candidate Name-{{data.candidate_name}}</h4>
+                
+                 
+                  <p class="card-text"> Location-{{data.location}}</p>
+                  <p class="card-text">Age-{{data.age}}</p>
+                  <p class="card-text">Qualification-{{data.qualification}}</p>
+                  <p class="card-text">Skills-{{data.skills}}</p>
+                  <p class="card-text">Experience-{{data.experience}}</p>
+                  <p class="card-text">Expected Salary - {{data.expect_salary}}</p>
+                  <p class="card-text"> Current Salary - {{data.current_salary}}</p>
+                 <p> <a href="/media/{{data.cv_file}}" download="customname.pdf">Download CV</a></p>
+                  {% comment %} <button name="subject" type="submit" value="ACCEPT">Accepted</button>
+                  <button name="subject2" type="submit" value="REJECT">Reject</button>
+                  <button name="subject2" type="submit" value="REJECT">ShortList</button> {% endcomment %}
+                </div></center>
+              </div>
+              <div class="modal-footer">
+             
+                <button name="subject" class="btn btn-success m-1" type="submit" value="ACCEPT">Accepted</button>
+                <button name="subject2" class="btn btn-danger m-1" type="submit" value="REJECT">Reject</button>
+                <button name="subject2" class="btn btn-warning m-1" type="submit" value="REJECT">ShortList</button>
+                <a class="btn btn-primary"  href="{%url 'viewapplication' data.job_code   %}"  class="btn btn-danger m-1" > Back  </a>  
+              </div>
+              {% endfor %}
+    </form>
+            </div>
+           
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </body>
+</html>
